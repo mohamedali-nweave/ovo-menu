@@ -1,0 +1,523 @@
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>OVO Drink Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap">
+<style>
+/* OVO brand: cobalt blue band + white, light-blue brush strokes, chunky rounded type, the cup-hugging mascot */
+:root{
+  --bg:#F3F7FD; --surface:#FFFFFF; --ink:#12305C; --muted:#5D7396; --line:#C9DBF2;
+  --blue:#1F6FCC; --blue-soft:#DCEAFA; --sky:#C2DBF6; --band:#1F6FCC; --on-band:#FFFFFF;
+  --hot:#D9583A; --hot-soft:#FDE7DF; --cold:#1F6FCC; --cold-soft:#DCEAFA;
+  --display:"Baloo Bhaijaan 2","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Baloo Bhaijaan 2",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1428; --surface:#11203D; --ink:#E6EEFB; --muted:#9DB0CF; --line:#24395D;
+  --blue:#6AA6F2; --blue-soft:#18305A; --sky:#234573; --band:#1A4C94; --on-band:#FFFFFF;
+  --hot:#FF8A6C; --hot-soft:#3A2019; --cold:#6AA6F2; --cold-soft:#18305A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1428; --surface:#11203D; --ink:#E6EEFB; --muted:#9DB0CF; --line:#24395D;
+  --blue:#6AA6F2; --blue-soft:#18305A; --sky:#234573; --band:#1A4C94; --on-band:#FFFFFF;
+  --hot:#FF8A6C; --hot-soft:#3A2019; --cold:#6AA6F2; --cold-soft:#18305A; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding-block:24px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-direction:column;gap:6px}
+.brand{font-family:var(--display);font-size:2.6rem;line-height:1;color:var(--blue);margin:0;text-wrap:balance}
+.brand small{display:block;font-size:1.05rem;color:var(--muted);font-family:var(--body);font-weight:500;margin-top:8px}
+.tabs{display:flex;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;align-self:flex-start}
+.tabs button{font:600 .95rem var(--body);border:0;background:none;color:var(--muted);padding:8px 16px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--blue);color:var(--surface)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+.trail{display:flex;flex-wrap:wrap;gap:6px;min-height:30px}
+.trail button{font:500 .85rem var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:3px 12px;border-radius:999px;cursor:pointer}
+.trail button::after{content:" →";color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px 20px;display:flex;flex-direction:column;gap:18px}
+.step{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.question{font-family:var(--display);font-size:2.1rem;line-height:1.2;margin:0;text-wrap:balance;color:var(--ink);font-weight:400}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opt{font-family:var(--body);text-align:start;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:16px;padding:14px 16px;cursor:pointer;display:flex;flex-direction:column;gap:2px;transition:border-color .15s,transform .15s}
+.opt:hover{border-color:var(--accent,var(--blue));transform:translateY(-1px)}
+.opt b{font-size:1.05rem;font-weight:600}
+.opt span{font-size:.82rem;color:var(--muted)}
+.opts.root{grid-template-columns:1fr 1fr}
+.opt.hot,.opt.cold{min-height:120px;justify-content:flex-end;border:0}
+.opt.hot{background:var(--hot-soft)} .opt.cold{background:var(--cold-soft)}
+.opt.hot b{color:var(--hot)} .opt.cold b{color:var(--cold)}
+.opt.hot b,.opt.cold b{font-family:var(--display);font-size:2.2rem;font-weight:400;line-height:1.1}
+.card[data-tone="hot"]{--accent:var(--hot)} .card[data-tone="cold"]{--accent:var(--cold)}
+.card[data-tone="hot"] .question{color:var(--hot)} .card[data-tone="cold"] .question{color:var(--cold)}
+.result-name{font-size:1.9rem;font-weight:700;line-height:1.2;margin:0;text-wrap:balance}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 14px;display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}
+.size i{font-style:normal;font-size:.8rem;color:var(--muted);font-weight:600}
+.size b{font-size:1.35rem;color:var(--accent,var(--blue))}
+.extras{border-top:1px dashed var(--line);padding-top:14px;display:flex;flex-direction:column;gap:6px}
+.extras h3{margin:0;font-size:.9rem;color:var(--muted);font-weight:600}
+.extras li{display:flex;justify-content:space-between;gap:12px;font-size:.92rem}
+.extras ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:600 .9rem var(--body);border-radius:999px;padding:9px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn.primary{background:var(--accent,var(--blue));border-color:transparent;color:var(--surface)}
+
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.toolbar input{flex:1 1 220px;min-width:0;font:500 .95rem var(--body);padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.zoom .btn{min-width:42px;padding-inline:0;font-size:1.1rem;line-height:1}
+.legend{font-size:.85rem;color:var(--muted)}
+.tree-box{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow-x:auto;overflow-y:hidden;padding:20px 14px 28px;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;cursor:grab}
+.tree-box.dragging{cursor:grabbing;user-select:none}
+.org{width:max-content;min-width:100%}
+.org ul{display:flex;justify-content:center;align-items:flex-start;margin:0;padding:24px 0 0;list-style:none;position:relative}
+.org>ul{padding-top:0}
+.org li{position:relative;display:flex;flex-direction:column;align-items:center;padding:24px 5px 0}
+.org>ul>li{padding-top:0}
+.org li::before,.org li::after{content:"";position:absolute;top:0;width:50%;height:24px;border-top:2px solid var(--line)}
+.org li::before{inset-inline-end:50%}
+.org li::after{inset-inline-start:50%;border-inline-start:2px solid var(--line)}
+.org li:first-child::before,.org li:last-child::after{border-top:0}
+.org>ul>li::before,.org>ul>li::after{display:none}
+.org ul ul::before{content:"";position:absolute;top:0;inset-inline-start:50%;height:24px;border-inline-start:2px solid var(--line)}
+.org li.closed>ul,.org li.closed>.list{display:none}
+.n{display:flex;flex-direction:column;align-items:center;gap:5px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
+.chip{font-weight:600;font-size:.82rem;padding:1px 10px;border-radius:999px;background:var(--blue-soft);color:var(--blue);white-space:nowrap}
+.tone-hot .chip{background:var(--hot-soft);color:var(--hot)}
+.tone-cold .chip{background:var(--cold-soft);color:var(--cold)}
+.qbox{display:block;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:8px 12px;max-width:160px;text-align:center;font-size:.88rem;font-weight:500;line-height:1.4;text-wrap:balance;transition:border-color .15s}
+.n:hover .qbox{border-color:var(--blue)}
+.qbox.root{font-family:var(--display);font-size:1.3rem;font-weight:400;color:var(--blue);max-width:240px;padding:10px 18px}
+.count{font-size:.74rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.leafcard{display:flex;flex-direction:column;align-items:center;gap:5px}
+.dbox{display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--surface);border:2px solid var(--blue);border-radius:14px;padding:7px 12px;max-width:160px;text-align:center}
+.tone-hot .dbox{border-color:var(--hot)} .tone-cold .dbox{border-color:var(--cold)}
+.drink{font-weight:600;font-size:.88rem;line-height:1.3;unicode-bidi:isolate}
+.price{font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums;unicode-bidi:isolate;white-space:nowrap}
+.list{position:relative;margin-top:24px;display:flex;flex-direction:column;background:var(--surface);border:2px solid var(--blue);border-radius:14px;padding:6px;min-width:190px;max-width:240px}
+.tone-hot>.list{border-color:var(--hot)} .tone-cold>.list{border-color:var(--cold)}
+.list::before{content:"";position:absolute;top:-26px;inset-inline-start:50%;height:24px;border-inline-start:2px solid var(--line)}
+.list h4{margin:0;padding:4px 8px 6px;font-size:.78rem;color:var(--muted);font-weight:600;unicode-bidi:isolate;border-bottom:1px dashed var(--line)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:5px 8px;border-radius:9px}
+.row+.row{border-top:1px solid var(--bg)}
+.row>span:first-child{display:flex;flex-direction:column;min-width:0}
+.row .sub{font-size:.74rem;color:var(--muted)}
+.hit{outline:2.5px solid var(--blue);outline-offset:2px;border-radius:12px;background:var(--blue-soft)}
+.empty{color:var(--muted);padding:8px 0}
+@media (max-width:480px){.question{font-size:1.75rem}.brand{font-size:2.2rem}.opts{grid-template-columns:1fr}.opts.root{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){.opt{transition:none}.opt:hover{transform:none}}
+
+/* ---- OVO brand layer ---- */
+body{font-size:16px;line-height:1.55}
+.hero{flex-direction:row!important;position:relative;overflow:hidden;background:var(--band);color:var(--on-band);border-radius:30px;padding:24px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hero::before,.hero::after{content:"";position:absolute;background:var(--on-band);opacity:.1;border-radius:58% 42% 63% 37%/45% 55% 45% 55%;pointer-events:none}
+.hero::before{width:200px;height:90px;inset-inline-end:-40px;top:-24px;transform:rotate(-12deg)}
+.hero::after{width:160px;height:70px;inset-inline-start:35%;bottom:-34px;transform:rotate(8deg)}
+.mark{display:flex;flex-direction:column;gap:4px;position:relative;z-index:1;min-width:0}
+.wm{font-family:var(--display);font-weight:800;font-size:4.2rem;line-height:.85;margin:0;direction:ltr;letter-spacing:-.01em}
+.tag{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85;direction:ltr;font-weight:600}
+.hero .sub{margin:12px 0 0;font-size:1.02rem;font-weight:500;max-width:30ch;text-wrap:balance}
+.mascot{width:118px;height:auto;flex:none;position:relative;z-index:1;color:var(--on-band)}
+.tabs{border:2px solid var(--line)}
+.tabs button{font-weight:700;font-size:1rem}
+.btn{border-width:2px;font-weight:700}
+.card{border:2px solid var(--line);border-radius:28px;box-shadow:0 6px 0 var(--blue-soft)}
+.step{color:var(--blue);letter-spacing:.02em}
+.question{font-family:var(--display);font-weight:800;font-size:2.1rem;line-height:1.35;color:var(--ink)!important}
+.hl{background:linear-gradient(transparent 52%,var(--hl,var(--sky)) 52%,var(--hl,var(--sky)) 92%,transparent 92%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .18em;border-radius:6px}
+.card[data-tone="hot"]{--hl:var(--hot-soft)}
+.opt{background:var(--surface);border:2px solid var(--line);border-radius:20px}
+.opt:hover{background:var(--blue-soft);border-color:var(--blue)}
+.card[data-tone="hot"] .opt:hover{background:var(--hot-soft);border-color:var(--hot)}
+.opt b{font-weight:700;font-size:1.1rem}
+.opt.hot,.opt.cold{min-height:130px;border-radius:24px}
+.opt.hot b,.opt.cold b{font-weight:800;font-size:2.4rem}
+.opt.cold{background:var(--blue-soft)} .opt.cold b{color:var(--blue)}
+.result-name{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.3}
+.size{background:var(--band);border:0;border-radius:999px;padding:8px 18px;color:var(--on-band)}
+.size b,.size i{color:var(--on-band)!important}
+.size i{opacity:.85}
+.tree-box{border:2px solid var(--line);border-radius:28px}
+.chip{background:var(--band);color:var(--on-band);font-weight:700}
+.tone-hot .chip{background:var(--hot-soft);color:var(--hot)}
+.tone-cold .chip{background:var(--band);color:var(--on-band)}
+.qbox{background:var(--surface);border:2px solid var(--sky);border-radius:16px;font-weight:600}
+.qbox.root{font-family:var(--display);font-weight:800;font-size:1.4rem;background:var(--blue-soft);border:0;color:var(--blue)}
+.list{border-radius:18px}
+.list h4{align-self:flex-start;background:var(--band);color:var(--on-band);border:0;border-radius:999px;padding:1px 12px;margin:2px 2px 6px;font-size:.8rem;font-weight:700}
+.tone-hot>.list h4{background:var(--hot-soft);color:var(--hot)}
+.foot{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;color:var(--muted);font-size:.9rem;padding-top:8px}
+.foot p{margin:0}
+.foot b{color:var(--blue);font-weight:700}
+.foot .heart{width:26px;height:26px;color:var(--blue);margin-bottom:4px}
+@media (max-width:480px){.wm{font-size:3.3rem}.mascot{width:88px}.question{font-size:1.75rem}.hero{padding:20px 18px}}
+.lang{color:var(--blue);font-weight:700;text-decoration:none;border:2px solid var(--line);border-radius:999px;padding:2px 14px;margin-bottom:6px}
+</style>
+</head><body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="mark">
+      <h1 class="wm">OVO</h1>
+      <span class="tag">Specialty Coffee &amp; Milkshakes</span>
+      <p class="sub" id="sub">Answer a few questions and we'll find your drink</p>
+    </div>
+    <svg class="mascot" viewBox="0 0 150 140" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 118c-10-14-12-34-6-52 7-22 30-34 50-28 12 4 20 12 23 22"/>
+      <path d="M22 118c8 6 22 8 36 6"/>
+      <path d="M34 62q5-6 10 0M54 58q5-6 10 0"/>
+      <path d="M36 74l4 3M42 73l3 3M58 70l4 3M64 69l3 3" stroke-width="3"/>
+      <path d="M48 82q5 4 10 0" stroke-width="3.5"/>
+      <rect x="82" y="36" width="50" height="12" rx="5"/>
+      <path d="M85 48l6 74h32l6-74"/>
+      <path d="M88 66h38l-2 22H90z" fill="currentColor" opacity=".35"/>
+      <path d="M38 96q22 8 50-4"/>
+      <path d="M44 106q20 6 42-2"/>
+      <path d="M28 124l-4 10M46 126l2 9"/>
+      <path d="M10 30c0-5 7-6 8 0 1-6 8-5 8 0 0 5-8 9-8 9s-8-4-8-9z" fill="currentColor" stroke-width="2"/>
+    </svg>
+  </header>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-play" aria-selected="true">Find my drink</button>
+    <button role="tab" id="tab-tree" aria-selected="false">Full tree</button>
+  </div>
+
+  <section id="play">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="trail" id="trail"></div>
+      <div class="card" id="card"></div>
+    </div>
+  </section>
+
+  <section id="tree" hidden>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search a drink or flavor… e.g. Lotus">
+        <button class="btn" id="expand">Expand all</button>
+        <button class="btn" id="collapse">Collapse all</button>
+        <span class="zoom" style="display:flex;gap:4px"><button class="btn" id="zout" aria-label="Zoom out">−</button><button class="btn" id="zin" aria-label="Zoom in">+</button></span>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="tree-box" id="treebox"></div>
+    </div>
+  </section>
+  <footer class="foot">
+    <a class="lang" href="ar.html" lang="ar">عربي</a>
+    <svg class="heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.6.7-1.5 2.2-2.6 4.3-2.6 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg>
+    <p dir="ltr">11 Hehya Street, Camp Shezar, El-Gaish Road, Alexandria</p>
+    <p><b>Ovo.coffee.eg</b> · <span dir="ltr">01287974276</span></p>
+  </footer>
+</div>
+<script>
+const D=(n,p,x)=>({t:'d',n,p,x});
+const Q=(q,o)=>({t:'q',q,o:o.map(([a,h,c])=>({a,h,c}))});
+const F=(base,p,fl,x)=>Q('Which flavor?',fl.map(f=>[f,null,D(base+' · '+f,p,x)]));
+
+const X={
+  hot:{t:'Add-ons',i:[['Flavor shot: Vanilla · Hazelnut · Caramel · Cinnamon · Salted Caramel · Chocolate',25],['Almond or Coconut Milk',40]]},
+  iced:{t:'Add-ons',i:[['Boba',25],['Cold Foam',30],['Almond or Coconut Milk',40]]},
+  matcha:{t:'Add-ons',i:[['Cold Foam',30]]},
+  boba:{t:'Add-ons',i:[['Boba',25]]}
+};
+
+const HOT=Q('Need a wake-up?',[
+ ['Yes, coffee please',null,Q('How do you like it made?',[
+   ['Turkish, in a cezve',null,Q('Classic or flavored?',[
+     ['Classic',null,Q('How do you take it?',[
+       ['Plain','Pure Turkish coffee',D('Turkish Coffee',[50,60])],
+       ['Spiced','With cardamom and spices',D('Turkish Coffee Mahaweg',[55,65])],
+       ['With milk','French-style',D('French Coffee',[65,75])]])],
+     ['Flavored',null,Q('Which flavor?',[
+       ['Hazelnut',null,D('Hazelnut Coffee',[80,95])],
+       ['Nutella',null,D('Nutella Coffee',[80,95])],
+       ['White Chocolate',null,D('White Chocolate Coffee',[80,95])],
+       ['Salted Caramel',null,D('Salted Caramel Coffee',[80,95])]])]])],
+   ['Espresso machine',null,Q('With milk or without?',[
+     ['No milk',null,Q('A short shot or a long cup?',[
+       ['Short and strong',null,D('Espresso',[60,70])],
+       ['Long cup',null,Q('Machine or hand-poured?',[
+         ['Machine','Espresso topped with hot water',D('Americano Black',[null,80])],
+         ['Hand-poured','You pick the beans',D('V60',140)]])]])],
+     ['With milk',null,Q('Plain or flavored?',[
+       ['Plain',null,Q('How much milk?',[
+         ['A little','Coffee leads',Q('Which ratio?',[
+           ['A dash of milk',null,D('Macchiato',[70,80],'hot')],
+           ['Half and half',null,D('Cortado',[80,90],'hot')],
+           ['A bit more, silky',null,D('Flat White',[80,90],'hot')]])],
+         ['A lot','A big creamy cup',Q('Foamy or smooth?',[
+           ['Thick foam',null,D('Cappuccino',[85,100],'hot')],
+           ['Smooth and creamy',null,D('Latte',[85,100],'hot')],
+           ['Light and long',null,D('Americano White',[null,100],'hot')]])]])],
+       ['Flavored',null,Q('What taste?',[
+         ['Chocolate',null,Q('Dark or white?',[
+           ['Dark',null,D('Mocha',[100,120],'hot')],
+           ['White',null,D('White Mocha',[100,120],'hot')]])],
+         ['Caramel & sweet',null,Q('Which kind of sweet?',[
+           ['Condensed milk',null,D('Spanish Latte',[90,100],'hot')],
+           ['Salted Caramel',null,D('Salted Caramel Latte',[100,120],'hot')],
+           ['Dulce de Leche',null,D('Dulce de Leche Latte',[100,120],'hot')]])],
+         ['Nutty',null,Q('Pecan or pistachio?',[
+           ['Pecan',null,D('Pecan Latte',[130,150],'hot')],
+           ['Pistachio',null,D('Pistachio Latte',[130,150],'hot')]])]])]])]])],
+   ['Quick (instant)',null,Q('Black or with milk?',[
+     ['Black',null,D('Nescafé Black',[50,60])],
+     ['With milk',null,D('Nescafé with Milk',[70,80])]])]])],
+ ['No, something else',null,Q('Something calm or something sweet?',[
+   ['Calm',null,Q('Tea or something different?',[
+     ['Tea',null,Q('Which tea?',[
+       ['Classic tea',null,D('Tea',30)],
+       ['Green',null,D('Green Tea',35)],
+       ['Herbal',null,D('Herbal Tea',35)],
+       ['Flavored',null,D('Flavored Tea',40)],
+       ['With milk',null,D('Milk Tea',50)]])],
+     ['Something different',null,Q('Which one?',[
+       ['Hot lemon',null,D('Hot Lemon',35)],
+       ['Apple cider',null,D('Hot Cider',70)],
+       ['Matcha',null,D('Hot Matcha',95)]])]])],
+   ['Sweet and rich',null,Q('Hot chocolate or a creamy dessert drink?',[
+     ['Hot chocolate',null,Q('Classic or loaded?',[
+       ['Classic',null,D('Hot Chocolate',[85,100],'hot')],
+       ['Loaded',null,Q('What goes in?',[
+         ['Nutella',null,D('Nutella Hot Chocolate',[95,120],'hot')],
+         ['Marshmallow',null,D('Marshmallow Hot Chocolate',[95,120],'hot')],
+         ['Oreo',null,D('Oreo Hot Chocolate',[95,120],'hot')],
+         ['Bounty',null,D('Bounty Hot Chocolate',[95,120],'hot')],
+         ['Peanut butter',null,D('Peanut Butter Hot Chocolate',[95,120],'hot')],
+         ['Tiramisu',null,D('Tiramisu Hot Chocolate',[120,140],'hot')]])]])],
+     ['Creamy',null,Q('What taste?',[
+       ['Kinder',null,D('Hot Kinder',[120,140],'hot')],
+       ['Lotus',null,D('Hot Lotus',[120,140],'hot')],
+       ['Pistachio',null,D('Hot Pistachio',[135,150],'hot')]])]])]])]
+]);
+
+const COLD=Q('Need a wake-up?',[
+ ['Yes, caffeine',null,Q('Coffee, matcha, or an energy kick?',[
+   ['Coffee',null,Q('Over ice or blended?',[
+     ['Over ice',null,Q('Black or with milk?',[
+       ['Black','Hand-poured, you pick the beans',D('Iced V60',150)],
+       ['With milk',null,Q('Stirred or shaken?',[
+         ['Stirred',null,Q('Plain or flavored?',[
+           ['Plain',null,D('Iced Coffee',110,'iced')],
+           ['Flavored',null,Q('What taste?',[
+             ['Chocolate',null,Q('White or blended?',[
+               ['White mocha',null,D('Iced White Mocha',125,'iced')],
+               ['Blended mocha',null,D('Iced Blended Mocha',125,'iced')]])],
+             ['Caramel & sugar',null,Q('Which one?',[
+               ['Caramel macchiato',null,D('Iced Caramel Macchiato',120,'iced')],
+               ['Salted caramel',null,D('Iced Salted Caramel Latte',125,'iced')],
+               ['Brown sugar',null,D('Iced Brown Sugar Latte',125,'iced')]])],
+             ['Condensed milk',null,Q('Plain or with pecan?',[
+               ['Spanish',null,D('Iced Spanish Latte',120,'iced')],
+               ['Spanish pecan',null,D('Iced Spanish Pecan Latte',150,'iced')]])]])]])],
+         ['Shaken',null,Q('What taste?',[
+           ['White mocha',null,D('Iced Shaken White Mocha',140)],
+           ['Salted caramel',null,D('Iced Shaken Salted Caramel',140)],
+           ['Dulce de leche',null,D('Iced Shaken Dulce de Leche',140)]])]])]])],
+     ['Blended (frappe)',null,Q('Classic or flavored?',[
+       ['Classic',null,D('Classic Frappe',130)],
+       ['Flavored',null,Q('Which family?',[
+         ['Chocolate',null,Q('Which one?',[
+           ['White mocha',null,D('White Mocha Frappe',145)],
+           ['Chocolate',null,D('Chocolate Frappe',145)],
+           ['Brownies',null,D('Brownies Frappe',145)]])],
+         ['Caramel',null,Q('Which one?',[
+           ['Salted caramel',null,D('Salted Caramel Frappe',145)],
+           ['Dulce de leche',null,D('Dulce de Leche Frappe',145)]])],
+         ['Cookies',null,Q('Lotus or Oreo?',[
+           ['Lotus',null,D('Lotus Frappe',145)],
+           ['Oreo',null,D('Oreo Frappe',145)]])],
+         ['Something different',null,Q('Cinnamon or banana?',[
+           ['Cinnamon',null,D('Cinnamon Frappe',145)],
+           ['Banana',null,D('Banana Frappe',145)]])]])]])]])],
+   ['Matcha',null,Q('Over ice or blended?',[
+     ['Over ice',null,Q('Classic or flavored?',[
+       ['Classic',null,Q('Regular or with condensed milk?',[
+         ['Regular',null,D('Iced Matcha Latte',125,'matcha')],
+         ['Spanish',null,D('Iced Spanish Matcha',135,'matcha')]])],
+       ['Flavored',null,F('Iced Matcha',140,['White Chocolate','Banana Caramel','Salted Caramel','Strawberry','Mango Coconut','Passion Fruit','Lychee','Strawberry Coconut'],'matcha')]])],
+     ['Blended (frappe)',null,F('Matcha Frappe',150,['Mango','Strawberry','Coconut','White Chocolate','Lychee'])]])],
+   ['Energy kick',null,Q('Red Bull, plain or flavored?',[
+     ['Plain',null,D('Red Bull',90)],
+     ['Flavored',null,D('Flavored Red Bull',135)]])]])],
+ ['No caffeine',null,Q('Something rich or something refreshing?',[
+   ['Rich and creamy',null,Q('Milkshake or ice cream?',[
+     ['Milkshake',null,Q('What kind?',[
+       ['One flavor',null,F('Milkshake',130,['Vanilla','Chocolate','Caramel','Salted Caramel','Mango','Strawberry','Mixed Berry','Pineapple','Blueberry','Cola','Peach','Lemon','Passion Fruit','Lychee','Pink Guava','Cotton Candy','Sour Cola'],'boba')],
+       ['Fruit mix',null,F('Milkshake',140,['Mango Passion Fruit','Mango Peach','Strawberry Coconut','Mango Coconut'],'boba')],
+       ['Yogurt & cheesecake',null,Q('Yogurt or cheesecake?',[
+         ['Yogurt',null,Q('Berry or mango?',[
+           ['Berry',null,D('Berry Yogurt',140,'boba')],
+           ['Mango',null,D('Mango Yogurt',140,'boba')]])],
+         ['Cheesecake',null,Q('What taste?',[
+           ['Berry',null,D('Cheesecake Berry',140,'boba')],
+           ['Strawberry',null,D('Cheesecake Strawberry',140,'boba')],
+           ['Blueberry',null,D('Cheesecake Blueberry',140,'boba')],
+           ['Berry yogurt',null,D('Berry Yogurt Cheesecake',150,'boba')]])]])],
+       ['Dessert',null,Q('Cookies, candy bars, or nuts?',[
+         ['Cookies & sweets',null,Q('Which one?',[
+           ['A single sweet',null,F('Milkshake',140,['Brownies','Nutella','Lotus','Oreo','Kinder'],'boba')],
+           ['Nutella & banana',null,D('Milk Nutella Banana',150,'boba')],
+           ['White choc & strawberry',null,D('White Chocolate Strawberry',140,'boba')]])],
+         ['Candy bars',null,F('Milkshake',150,['Kinder Brownies','Snickers','KitKat','Mars','Bounty'],'boba')],
+         ['Nuts',null,Q('Which one?',[
+           ['Pecan salted caramel',null,D('Pecan Salted Caramel',160,'boba')],
+           ['Cashew caramel',null,D('Cashew Caramel',160,'boba')],
+           ['Pistachio',null,D('Pistachio',170,'boba')]])],
+         ['Something crazy',null,Q('Which one?',[
+           ['Jelly cola',null,D('Jelly Cola Mix',150,'boba')],
+           ['Cotton candy & marshmallow',null,D('Cotton Candy Marshmallow',150,'boba')]])]])]])],
+     ['Ice cream',null,Q('Topped with?',[
+       ['Flavor or boba',null,D('Soft Ice Cream (Flavor / Boba)',70)],
+       ['Brownies or Oreo',null,D('Soft Ice Cream (Brownies / Oreo)',85)]])]])],
+   ['Refreshing',null,Q('Natural or fizzy?',[
+     ['Natural',null,Q('Fresh juice or smoothie?',[
+       ['Fresh juice',null,Q('Which juice?',[
+         ['Mango',null,D('Mango Juice',85)],
+         ['Strawberry',null,D('Strawberry Juice',85)],
+         ['Guava',null,D('Guava Juice',85)],
+         ['Watermelon',null,D('Watermelon Juice',85)],
+         ['Dates with milk',null,D('Date with Milk',85)],
+         ['Avocado with honey',null,D('Avocado with Honey',120)]])],
+       ['Smoothie','Blended with ice',F('Smoothie',100,['Watermelon','Mango','Strawberry','Pineapple','Piña Colada','Peach','Pink Guava','Blueberry','Mixed Berry','Passion Fruit','Lychee'],'boba')]])],
+     ['Fizzy & fresh',null,Q('What vibe?',[
+       ['Mint (mojito)',null,F('Mojito & Sunshine',100,['Strawberry','Berry','Pineapple','Blueberry','Mixed Berry','Peach','Passion Fruit','Lychee'],'boba')],
+       ['Lemon',null,Q('Which lemonade?',[
+         ['Pink lemon coconut',null,D('Pink Lemon Coconut',120)],
+         ['Mango lemon coconut',null,D('Mango Lemon Coconut',120)],
+         ['Piña colada',null,D('Pina Colada Lemonade',120)]])],
+       ['Iced tea',null,F('Iced Tea',100,['Passion Fruit','Mixed Berries','Strawberry'])],
+       ['Cloudy',null,F('Cloudy',130,['Piña Colada','Lychee','Mixed Berry','Strawberry','Passion Fruit'])],
+       ['Cola or water',null,Q('Which one?',[
+         ['Sour cola',null,D('Sour Cola',110)],
+         ['Water',null,D('Water',12)]])]])]])]])]
+]);
+
+const TREE=Q('Hot or cold today?',[['Hot','Something to warm up',HOT],['Cold','Something to cool down',COLD]]);
+
+const count=n=>n.t==='d'?1:n.o.reduce((s,o)=>s+count(o.c),0);
+const depth=n=>n.t==='d'?0:1+Math.max(...n.o.map(o=>depth(o.c)));
+const TOTAL=count(TREE), DEPTH=depth(TREE);
+document.getElementById('sub').textContent=`Answer a few questions and we'll find your drink among ${TOTAL} options`;
+document.getElementById('legend').textContent=`${TOTAL} drinks, each at the end of a branch · longest path is ${DEPTH} questions`;
+
+const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e};
+const sizes=p=>Array.isArray(p)?[[p[0],'M'],[p[1],'L']].filter(x=>x[0]!=null):[[p,'']];
+const priceText=p=>sizes(p).map(([v,s])=>(s?s+' ':'')+v).join(' · ')+' EGP';
+const ord=['First','Second','Third','Fourth','Fifth','Sixth','Seventh','Eighth','Ninth','Tenth'];
+
+let path=[];
+const at=k=>{let n=TREE;for(let i=0;i<k;i++)n=n.o[path[i]].c;return n};
+function renderPlay(){
+  const trail=document.getElementById('trail'),card=document.getElementById('card');
+  trail.replaceChildren();card.replaceChildren();
+  path.forEach((ix,i)=>{const b=el('button',null,at(i).o[ix].a);b.title='Go back to this question';b.onclick=()=>{path=path.slice(0,i);renderPlay()};trail.append(b)});
+  card.dataset.tone=path.length?(path[0]===0?'hot':'cold'):'';
+  const node=at(path.length);
+  if(node.t==='q'){
+    card.append(el('div','step',(ord[path.length]||`Question ${path.length+1}`)+(ord[path.length]?' question':'')));
+    {const h=el('h2','question');h.append(el('span','hl',node.q));card.append(h)}
+    const g=el('div','opts'+(path.length?'':' root'));
+    node.o.forEach((o,i)=>{
+      const b=el('button','opt'+(path.length?'':(i?' cold':' hot')));
+      b.append(el('b',null,o.a));if(o.h)b.append(el('span',null,o.h));
+      b.onclick=()=>{path.push(i);renderPlay();window.scrollTo({top:0,behavior:'smooth'})};
+      g.append(b)});
+    card.append(g);
+    if(path.length){const a=el('div','actions');const back=el('button','btn','Back');back.onclick=()=>{path.pop();renderPlay()};a.append(back);card.append(a)}
+  }else{
+    card.append(el('div','step',`Your drink, after ${path.length} questions`));
+    {const h=el('h2','result-name');h.append(el('span','hl',node.n));card.append(h)}
+    const s=el('div','sizes');
+    sizes(node.p).forEach(([v,lab])=>{const d=el('div','size');if(lab)d.append(el('i',null,lab==='M'?'Medium':'Large'));d.append(el('b',null,v));d.append(el('i',null,'EGP'));s.append(d)});
+    card.append(s);
+    if(node.x){const ex=el('div','extras');ex.append(el('h3',null,X[node.x].t));const ul=el('ul');X[node.x].i.forEach(([n,p])=>{const li=el('li');li.append(el('span',null,n),el('b',null,'+'+p));ul.append(li)});ex.append(ul);card.append(ex)}
+    const a=el('div','actions');
+    const again=el('button','btn primary','Start over');again.onclick=()=>{path=[];renderPlay()};
+    const back=el('button','btn','Back');back.onclick=()=>{path.pop();renderPlay()};
+    const find=el('button','btn','Show in tree');find.onclick=()=>{show('tree');document.getElementById('search').value=node.n;filter()};
+    a.append(again,back,find);card.append(a);
+  }
+}
+
+const L={"drinks": "drinks", "empty": "No drink matches that. Try another word."};
+const box=document.getElementById('treebox');
+const isLeaf=n=>n.t==='d';
+const org=el('div','org');
+const prefixOf=list=>{const ps=list.map(x=>x.c.n.split(' · ')[0]);return list.every(x=>x.c.n.includes(' · '))&&ps.every(p=>p===ps[0])?ps[0]:null};
+function nodeEl(o,node,tone,d){
+  const li=el('li',tone?'tone-'+tone:'');li._d=d;
+  if(isLeaf(node)){
+    li.classList.add('leafli');
+    const c=el('div','leafcard');if(o)c.append(el('span','chip',o.a));
+    const b=el('div','dbox');b.append(el('span','drink',node.n),el('span','price',priceText(node.p)));c.append(b);
+    li.append(c);li._s=((o?o.a+' ':'')+node.n).toLowerCase();return li;
+  }
+  const btn=el('button','n');if(o)btn.append(el('span','chip',o.a));
+  btn.append(el('span','qbox'+(o?'':' root'),node.q));
+  const cnt=el('span','count');btn.append(cnt);li.append(btn);li._s=(o?o.a:'').toLowerCase();
+  let kids;
+  if(node.o.every(x=>isLeaf(x.c))){
+    kids=el('div','list');const pre=prefixOf(node.o);
+    if(pre)kids.append(el('h4',null,pre));
+    node.o.forEach(x=>{
+      const r=el('div','row'),l=el('span');
+      if(pre)l.append(el('span','drink',x.a));
+      else{l.append(el('span','drink',x.c.n));if(!x.c.n.toLowerCase().includes(x.a.toLowerCase()))l.append(el('span','sub',x.a))}
+      r.append(l,el('span','price',priceText(x.c.p)));r._s=(x.a+' '+x.c.n).toLowerCase();kids.append(r)});
+  }else{
+    kids=el('ul');node.o.forEach((x,i)=>kids.append(nodeEl(x,x.c,d===0?(i?'cold':'hot'):tone,d+1)));
+  }
+  li.append(kids);
+  const n=count(node);
+  li._set=open=>{li.classList.toggle('closed',!open);cnt.textContent=open?'−':`+ ${n} ${L.drinks}`;btn.setAttribute('aria-expanded',open)};
+  li._set(d<2);
+  btn.onclick=()=>{li._set(li.classList.contains('closed'));requestAnimationFrame(()=>btn.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'}))};
+  return li;
+}
+const rootUl=el('ul'),rootLi=nodeEl(null,TREE,'',0);rootUl.append(rootLi);org.append(rootUl);box.append(org);
+const empty=el('p','empty',L.empty);empty.hidden=true;box.append(empty);
+function centerTree(){rootLi.firstElementChild.scrollIntoView({block:'nearest',inline:'center'})}
+
+function filter(){
+  const t=document.getElementById('search').value.trim().toLowerCase();
+  box.querySelectorAll('.hit').forEach(e=>e.classList.remove('hit'));
+  let first=null;
+  const walk=li=>{
+    if(li.classList.contains('leafli')){const m=!!t&&li._s.includes(t);if(m){li.firstElementChild.classList.add('hit');first=first||li.firstElementChild}return m}
+    const kids=li.lastElementChild;let any=false;
+    if(kids.classList.contains('list')){for(const r of kids.children)if(r._s&&t&&r._s.includes(t)){r.classList.add('hit');first=first||r;any=true}}
+    else for(const c of kids.children)any=walk(c)||any;
+    li._set(t?(any||li._d===0):li._d<2);
+    return any;
+  };
+  const found=walk(rootLi);
+  empty.hidden=!t||found;
+  if(first)setTimeout(()=>first.scrollIntoView({block:'center',inline:'center',behavior:'smooth'}),60);
+  else if(!t)centerTree();
+}
+document.getElementById('search').addEventListener('input',filter);
+document.getElementById('expand').onclick=()=>box.querySelectorAll('li').forEach(li=>li._set&&li._set(true));
+document.getElementById('collapse').onclick=()=>{box.querySelectorAll('li').forEach(li=>li._set&&li._set(li._d===0));centerTree()};
+/* mouse drag to pan; touch uses native scrolling */
+{let sx=0,sl=0,down=false,moved=false;
+box.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;down=true;moved=false;sx=e.clientX;sl=box.scrollLeft});
+window.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>4){moved=true;box.classList.add('dragging')}if(moved)box.scrollLeft=sl-dx});
+window.addEventListener('pointerup',()=>{down=false;setTimeout(()=>box.classList.remove('dragging'),0)});
+box.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false}},true);}
+let zoom=1;const setZoom=z=>{zoom=Math.min(1.4,Math.max(.4,z));org.style.zoom=zoom};
+document.getElementById('zin').onclick=()=>setZoom(zoom+.15);
+document.getElementById('zout').onclick=()=>setZoom(zoom-.15);
+
+function show(which){
+  document.getElementById('play').hidden=which!=='play';
+  document.getElementById('tree').hidden=which!=='tree';
+  document.getElementById('tab-play').setAttribute('aria-selected',which==='play');
+  document.getElementById('tab-tree').setAttribute('aria-selected',which==='tree');
+  if(which==='tree')requestAnimationFrame(centerTree);
+}
+document.getElementById('tab-play').onclick=()=>show('play');
+document.getElementById('tab-tree').onclick=()=>show('tree');
+show(location.hash==='#tree'?'tree':'play');
+renderPlay();
+</script>
+
+</body></html>
