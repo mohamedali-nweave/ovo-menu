@@ -1,23 +1,18 @@
-<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>OVO Drink Tree</title>
+<!doctype html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:only light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>OVO Drink Tree</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap">
 <style>
 /* OVO brand: cobalt blue band + white, light-blue brush strokes, chunky rounded type, the cup-hugging mascot */
 :root{
-  --bg:#F3F7FD; --surface:#FFFFFF; --ink:#12305C; --muted:#5D7396; --line:#C9DBF2;
-  --blue:#1F6FCC; --blue-soft:#DCEAFA; --sky:#C2DBF6; --band:#1F6FCC; --on-band:#FFFFFF;
-  --hot:#D9583A; --hot-soft:#FDE7DF; --cold:#1F6FCC; --cold-soft:#DCEAFA;
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#014BAA; --muted:#4078BF; --line:#CCDBEE;
+  --blue:#014BAA; --blue-soft:#E6EDF7; --sky:#C0D2EA; --band:#014BAA; --on-band:#FFFFFF;
+  --hot:#014BAA; --hot-soft:#E6EDF7; --cold:#014BAA; --cold-soft:#E6EDF7;
   --display:"Baloo Bhaijaan 2","Arial Rounded MT Bold",system-ui,sans-serif;
   --body:"Baloo Bhaijaan 2",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0A1428; --surface:#11203D; --ink:#E6EEFB; --muted:#9DB0CF; --line:#24395D;
-  --blue:#6AA6F2; --blue-soft:#18305A; --sky:#234573; --band:#1A4C94; --on-band:#FFFFFF;
-  --hot:#FF8A6C; --hot-soft:#3A2019; --cold:#6AA6F2; --cold-soft:#18305A; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0A1428; --surface:#11203D; --ink:#E6EEFB; --muted:#9DB0CF; --line:#24395D;
-  --blue:#6AA6F2; --blue-soft:#18305A; --sky:#234573; --band:#1A4C94; --on-band:#FFFFFF;
-  --hot:#FF8A6C; --hot-soft:#3A2019; --cold:#6AA6F2; --cold-soft:#18305A; color-scheme:dark}
 
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
 .wrap{max-width:760px;margin:0 auto;padding-block:24px 48px;
@@ -44,7 +39,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid
 .opt span{font-size:.82rem;color:var(--muted)}
 .opts.root{grid-template-columns:1fr 1fr}
 .opt.hot,.opt.cold{min-height:120px;justify-content:flex-end;border:0}
-.opt.hot{background:var(--hot-soft)} .opt.cold{background:var(--cold-soft)}
+.opt.hot{background:var(--surface);border:2px solid var(--line)} .opt.cold{background:var(--cold-soft)}
 .opt.hot b{color:var(--hot)} .opt.cold b{color:var(--cold)}
 .opt.hot b,.opt.cold b{font-family:var(--display);font-size:2.2rem;font-weight:400;line-height:1.1}
 .card[data-tone="hot"]{--accent:var(--hot)} .card[data-tone="cold"]{--accent:var(--cold)}
@@ -98,7 +93,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid
 .list::before{content:"";position:absolute;top:-26px;inset-inline-start:50%;height:24px;border-inline-start:2px solid var(--line)}
 .list h4{margin:0;padding:4px 8px 6px;font-size:.78rem;color:var(--muted);font-weight:600;unicode-bidi:isolate;border-bottom:1px dashed var(--line)}
 .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:5px 8px;border-radius:9px}
-.row+.row{border-top:1px solid var(--bg)}
+.row+.row{border-top:1px solid #F2F6FB}
 .row>span:first-child{display:flex;flex-direction:column;min-width:0}
 .row .sub{font-size:.74rem;color:var(--muted)}
 .hit{outline:2.5px solid var(--blue);outline-offset:2px;border-radius:12px;background:var(--blue-soft)}
@@ -108,15 +103,16 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid
 
 /* ---- OVO brand layer ---- */
 body{font-size:16px;line-height:1.55}
-.hero{flex-direction:row!important;position:relative;overflow:hidden;background:var(--band);color:var(--on-band);border-radius:30px;padding:24px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.hero::before,.hero::after{content:"";position:absolute;background:var(--on-band);opacity:.1;border-radius:58% 42% 63% 37%/45% 55% 45% 55%;pointer-events:none}
+.hero{flex-direction:row!important;position:relative;overflow:hidden;background:#fff;color:#014BAA;border:2px solid var(--line);border-radius:30px;padding:24px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hero::before,.hero::after{content:"";position:absolute;background:#014BAA;opacity:.06;border-radius:58% 42% 63% 37%/45% 55% 45% 55%;pointer-events:none}
 .hero::before{width:200px;height:90px;inset-inline-end:-40px;top:-24px;transform:rotate(-12deg)}
 .hero::after{width:160px;height:70px;inset-inline-start:35%;bottom:-34px;transform:rotate(8deg)}
 .mark{display:flex;flex-direction:column;gap:4px;position:relative;z-index:1;min-width:0}
-.wm{font-family:var(--display);font-weight:800;font-size:4.2rem;line-height:.85;margin:0;direction:ltr;letter-spacing:-.01em}
-.tag{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85;direction:ltr;font-weight:600}
+.wm{margin:0;line-height:0;direction:ltr}
+.wm img{display:block;width:190px;height:auto}
+.tag{font-size:.82rem;color:#014BAA;direction:ltr;font-weight:700}
 .hero .sub{margin:12px 0 0;font-size:1.02rem;font-weight:500;max-width:30ch;text-wrap:balance}
-.mascot{width:118px;height:auto;flex:none;position:relative;z-index:1;color:var(--on-band)}
+.mascot{width:220px;height:auto;flex:none;position:relative;z-index:1}
 .tabs{border:2px solid var(--line)}
 .tabs button{font-weight:700;font-size:1rem}
 .btn{border-width:2px;font-weight:700}
@@ -149,7 +145,7 @@ body{font-size:16px;line-height:1.55}
 .foot p{margin:0}
 .foot b{color:var(--blue);font-weight:700}
 .foot .heart{width:26px;height:26px;color:var(--blue);margin-bottom:4px}
-@media (max-width:480px){.wm{font-size:3.3rem}.mascot{width:88px}.question{font-size:1.75rem}.hero{padding:20px 18px}}
+@media (max-width:480px){.wm img{width:130px}.tag{font-size:.72rem}.mascot{width:108px}.question{font-size:1.75rem}.hero{padding:20px 18px}}
 .lang{color:var(--blue);font-weight:700;text-decoration:none;border:2px solid var(--line);border-radius:999px;padding:2px 14px;margin-bottom:6px}
 </style>
 </head><body>
@@ -157,24 +153,11 @@ body{font-size:16px;line-height:1.55}
 <div class="wrap">
   <header class="hero">
     <div class="mark">
-      <h1 class="wm">OVO</h1>
+      <h1 class="wm"><img src="assets/ovo-logo-mark.svg" alt="OVO" width="298" height="116"></h1>
       <span class="tag">Specialty Coffee &amp; Milkshakes</span>
       <p class="sub" id="sub">Answer a few questions and we'll find your drink</p>
     </div>
-    <svg class="mascot" viewBox="0 0 150 140" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M22 118c-10-14-12-34-6-52 7-22 30-34 50-28 12 4 20 12 23 22"/>
-      <path d="M22 118c8 6 22 8 36 6"/>
-      <path d="M34 62q5-6 10 0M54 58q5-6 10 0"/>
-      <path d="M36 74l4 3M42 73l3 3M58 70l4 3M64 69l3 3" stroke-width="3"/>
-      <path d="M48 82q5 4 10 0" stroke-width="3.5"/>
-      <rect x="82" y="36" width="50" height="12" rx="5"/>
-      <path d="M85 48l6 74h32l6-74"/>
-      <path d="M88 66h38l-2 22H90z" fill="currentColor" opacity=".35"/>
-      <path d="M38 96q22 8 50-4"/>
-      <path d="M44 106q20 6 42-2"/>
-      <path d="M28 124l-4 10M46 126l2 9"/>
-      <path d="M10 30c0-5 7-6 8 0 1-6 8-5 8 0 0 5-8 9-8 9s-8-4-8-9z" fill="currentColor" stroke-width="2"/>
-    </svg>
+    <img class="mascot" src="assets/ovo-icon.svg" alt="" width="443" height="191">
   </header>
   <div class="tabs" role="tablist">
     <button role="tab" id="tab-play" aria-selected="true">Find my drink</button>
