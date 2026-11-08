@@ -195,13 +195,14 @@ body{font-size:16px;line-height:1.55}
 <script>
 const D=(n,p,x)=>({t:'d',n,p,x});
 const Q=(q,o)=>({t:'q',q,o:o.map(([a,h,c])=>({a,h,c}))});
-const F=(base,p,fl,x)=>Q('نكهة إيه؟',fl.map(f=>[f,null,D(base+' · '+f,p,x)]));
+const F=(base,p,fl,x,more=[])=>Q('نكهة إيه؟',[...fl.map(f=>[f,null,D(base+' · '+f,p,x)]),...more]);
 
 const X={
-  hot:{t:'تقدر تزوّد',i:[['نكهة: Vanilla · Hazelnut · Caramel · Cinnamon · Salted Caramel · Chocolate',25],['Almond Milk أو Coconut Milk',40]]},
+  hot:{t:'تقدر تزوّد',i:[['نكهة: Vanilla · Hazelnut · Caramel · Cinnamon · Salted Caramel · Chocolate',25],['Espresso',35],['Whipping Cream',30],['Almond Milk أو Coconut Milk',40]]},
   iced:{t:'تقدر تزوّد',i:[['Boba',25],['Cold Foam',30],['Almond Milk أو Coconut Milk',40]]},
   matcha:{t:'تقدر تزوّد',i:[['Cold Foam',30]]},
-  boba:{t:'تقدر تزوّد',i:[['Boba',25]]}
+  boba:{t:'تقدر تزوّد',i:[['Boba',25]]},
+  shake:{t:'تقدر تزوّد',i:[['Boba',25],['Whipping Cream',25]]}
 };
 
 const HOT=Q('محتاج تصحصح؟',[
@@ -212,168 +213,184 @@ const HOT=Q('محتاج تصحصح؟',[
        ['محوّجة','بالحبهان والتوابل',D('Turkish Coffee Mahaweg',[55,65])],
        ['باللبن','قهوة فرنساوي',D('French Coffee',[65,75])]])],
      ['بنكهة',null,Q('نكهة إيه؟',[
-       ['بندق',null,D('Hazelnut Coffee',[80,95])],
-       ['نوتيلا',null,D('Nutella Coffee',[80,95])],
-       ['وايت شوكلت',null,D('White Chocolate Coffee',[80,95])],
-       ['سولتد كراميل',null,D('Salted Caramel Coffee',[80,95])]])]])],
+       ['بندق',null,D('Hazelnut Coffee',[85,100])],
+       ['نوتيلا',null,D('Nutella Coffee',[85,100])],
+       ['وايت شوكلت',null,D('White Chocolate Coffee',[85,100])],
+       ['سولتد كراميل',null,D('Salted Caramel Coffee',[85,100])]])]])],
    ['إسبريسو من المكنة',null,Q('باللبن ولا من غير؟',[
      ['من غير لبن',null,Q('شوت صغير ولا كوباية طويلة؟',[
-       ['شوت مركّز',null,D('Espresso',[60,70])],
+       ['شوت مركّز',null,D('Espresso',[65,75])],
        ['كوباية طويلة',null,Q('من المكنة ولا تقطير يدوي؟',[
-         ['من المكنة','إسبريسو بمية سخنة',D('Americano Black',[null,80])],
-         ['تقطير يدوي','وانت بتختار البن',D('V60',140)]])]])],
+         ['من المكنة','إسبريسو بمية سخنة',D('Americano Black',[null,100])],
+         ['تقطير يدوي','بن إثيوبي أو رواندي أو كولومبي',D('V60',180)]])]])],
      ['باللبن',null,Q('سادة ولا بنكهة؟',[
        ['سادة',null,Q('قد إيه لبن؟',[
          ['شوية','القهوة هي البطل',Q('أنهي نسبة؟',[
-           ['نقطة لبن',null,D('Macchiato',[70,80],'hot')],
-           ['نص ونص',null,D('Cortado',[80,90],'hot')],
-           ['لبن ناعم أكتر',null,D('Flat White',[80,90],'hot')]])],
+           ['نقطة لبن',null,D('Macchiato',[75,85],'hot')],
+           ['نص ونص',null,D('Cortado',[95,110],'hot')],
+           ['لبن ناعم أكتر',null,D('Flat White',[95,110],'hot')]])],
          ['كتير','كوباية كريمي',Q('رغوة ولا ناعم؟',[
-           ['رغوة تقيلة',null,D('Cappuccino',[85,100],'hot')],
-           ['ناعم وكريمي',null,D('Latte',[85,100],'hot')],
-           ['خفيف وطويل',null,D('Americano White',[null,100],'hot')]])]])],
+           ['رغوة تقيلة',null,D('Cappuccino',[100,120],'hot')],
+           ['ناعم وكريمي',null,D('Latte',[100,120],'hot')],
+           ['خفيف وطويل',null,D('Americano White',[null,120],'hot')]])]])],
        ['بنكهة',null,Q('أنهي طعم؟',[
          ['شوكولاتة',null,Q('غامقة ولا بيضا؟',[
-           ['غامقة',null,D('Mocha',[100,120],'hot')],
-           ['بيضا',null,D('White Mocha',[100,120],'hot')]])],
+           ['غامقة',null,D('Mocha',[115,130],'hot')],
+           ['بيضا',null,D('White Mocha',[115,130],'hot')]])],
          ['كراميل وحلاوة',null,Q('أنهي حلاوة؟',[
-           ['لبن مكثّف',null,D('Spanish Latte',[90,100],'hot')],
-           ['سولتد كراميل',null,D('Salted Caramel Latte',[100,120],'hot')],
-           ['دولسي دي ليتشي',null,D('Dulce de Leche Latte',[100,120],'hot')]])],
+           ['لبن مكثّف',null,D('Spanish Latte',[115,130],'hot')],
+           ['سولتد كراميل',null,D('Salted Caramel Latte',[115,130],'hot')],
+           ['دولسي دي ليتشي',null,D('Dulce de Leche Latte',[115,130],'hot')]])],
+         ['بسكوت',null,D('Cookie Butter Latte',[140,160],'hot')],
          ['مكسرات',null,Q('بيكان ولا فستق؟',[
-           ['بيكان',null,D('Pecan Latte',[130,150],'hot')],
-           ['فستق',null,D('Pistachio Latte',[130,150],'hot')]])]])]])]])],
+           ['بيكان',null,D('Pecan Latte',[140,160],'hot')],
+           ['فستق',null,D('Pistachio Latte',[140,160],'hot')]])]])]])]])],
    ['سريعة (نسكافيه)',null,Q('بلاك ولا باللبن؟',[
-     ['بلاك',null,D('Nescafé Black',[50,60])],
-     ['باللبن',null,D('Nescafé with Milk',[70,80])]])]])],
+     ['بلاك',null,D('Nescafé Black',[55,65])],
+     ['باللبن',null,D('Nescafé with Milk',[75,85])]])]])],
  ['لأ، حاجة تانية',null,Q('عاوز حاجة هادية ولا حلوة؟',[
    ['هادية',null,Q('شاي ولا حاجة تانية؟',[
      ['شاي',null,Q('أنهي شاي؟',[
-       ['شاي عادي',null,D('Tea',30)],
+       ['شاي عادي',null,D('Tea',35)],
        ['أخضر',null,D('Green Tea',35)],
        ['أعشاب',null,D('Herbal Tea',35)],
-       ['بنكهة',null,D('Flavored Tea',40)],
-       ['باللبن',null,D('Milk Tea',50)]])],
+       ['بنكهة',null,D('Flavored Tea',45)],
+       ['باللبن',null,D('Milk Tea',60)],
+       ['لبن بنكهة',null,D('Flavored Milk Tea',65)]])],
      ['حاجة تانية',null,Q('أنهي فيهم؟',[
        ['ليمون سخن',null,D('Hot Lemon',35)],
-       ['سايدر تفاح',null,D('Hot Cider',70)],
-       ['ماتشا',null,D('Hot Matcha',95)]])]])],
-   ['حلوة وتقيلة',null,Q('هوت شوكلت ولا كريمي بطعم الحلويات؟',[
+       ['سايدر تفاح',null,D('Hot Cider',80)],
+       ['ماتشا',null,D('Hot Matcha',130)]])]])],
+   ['حلوة وتقيلة',null,Q('هوت شوكلت ولا سحلب ولا كريمي بطعم الحلويات؟',[
      ['هوت شوكلت',null,Q('كلاسيك ولا بإضافة؟',[
-       ['كلاسيك',null,D('Hot Chocolate',[85,100],'hot')],
+       ['كلاسيك',null,D('Hot Chocolate Classic',[90,110],'hot')],
        ['بإضافة',null,Q('تزوّد عليها إيه؟',[
-         ['نوتيلا',null,D('Nutella Hot Chocolate',[95,120],'hot')],
-         ['مارشميلو',null,D('Marshmallow Hot Chocolate',[95,120],'hot')],
-         ['أوريو',null,D('Oreo Hot Chocolate',[95,120],'hot')],
-         ['باونتي',null,D('Bounty Hot Chocolate',[95,120],'hot')],
-         ['زبدة فول سوداني',null,D('Peanut Butter Hot Chocolate',[95,120],'hot')],
-         ['تيراميسو',null,D('Tiramisu Hot Chocolate',[120,140],'hot')]])]])],
+         ['خلطة OVO','توقيع المكان',D('Hot Chocolate OVO',[150,170],'hot')],
+         ['تيراميسو',null,D('Hot Chocolate Tiramisu',[140,160],'hot')],
+         ['نوتيلا و M&M',null,D('Hot Chocolate Nutella M&M',[140,160],'hot')],
+         ['باونتي',null,D('Hot Chocolate Bounty',[120,140],'hot')],
+         ['سولتد كراميل',null,D('Hot Chocolate Salted Caramel',[120,140],'hot')],
+         ['أوريو',null,D('Hot Chocolate Oreo',[140,160],'hot')]])]])],
+     ['سحلب',null,Q('أنهي طعم؟',[
+       ['دولسي دي ليتشي',null,D('Dulce De Leche Sahlab',[130,150],'hot')],
+       ['فستق',null,D('Pistachio Sahlab',[150,170],'hot')],
+       ['لوتس',null,D('Lotus Sahlab',[150,170],'hot')],
+       ['نوتيلا',null,D('Nutella Sahlab',[130,150],'hot')],
+       ['مكسرات',null,D('Nuts Sahlab',[120,135],'hot')],
+       ['شوكولاتة',null,D('Chocolate Sahlab',[130,150],'hot')],
+       ['وايت شوكلت',null,D('White Chocolate Sahlab',[130,150],'hot')]])],
      ['كريمي',null,Q('أنهي طعم؟',[
-       ['كيندر',null,D('Hot Kinder',[120,140],'hot')],
-       ['لوتس',null,D('Hot Lotus',[120,140],'hot')],
-       ['فستق',null,D('Hot Pistachio',[135,150],'hot')]])]])]])]
+       ['كيندر',null,D('Hot Kinder',[140,160],'hot')],
+       ['لوتس',null,D('Hot Lotus',[140,160],'hot')],
+       ['فستق',null,D('Hot Pistachio',[150,175],'hot')]])]])]])]
 ]);
 
 const COLD=Q('محتاج تصحصح؟',[
  ['آه، كافيين',null,Q('قهوة ولا ماتشا ولا طاقة؟',[
    ['قهوة',null,Q('على تلج ولا مخفوقة فرابيه؟',[
      ['على تلج',null,Q('بلاك ولا باللبن؟',[
-       ['بلاك','تقطير يدوي وانت بتختار البن',D('Iced V60',150)],
+       ['بلاك','تقطير يدوي · بن إثيوبي أو رواندي أو كولومبي',D('Iced V60',180)],
        ['باللبن',null,Q('مقلّبة عادي ولا متخضوضة (Shaken)؟',[
          ['عادي',null,Q('سادة ولا بنكهة؟',[
-           ['سادة',null,D('Iced Coffee',110,'iced')],
+           ['سادة',null,D('Iced Coffee',125,'iced')],
            ['بنكهة',null,Q('أنهي طعم؟',[
              ['شوكولاتة',null,Q('وايت ولا بلندد؟',[
-               ['وايت موكا',null,D('Iced White Mocha',125,'iced')],
-               ['موكا بلندد',null,D('Iced Blended Mocha',125,'iced')]])],
+               ['وايت موكا',null,D('Iced White Mocha',140,'iced')],
+               ['موكا بلندد',null,D('Iced Blended Mocha',140,'iced')]])],
              ['كراميل وسكر',null,Q('أنهي فيهم؟',[
-               ['كراميل ماكياتو',null,D('Iced Caramel Macchiato',120,'iced')],
-               ['سولتد كراميل',null,D('Iced Salted Caramel Latte',125,'iced')],
-               ['سكر بني',null,D('Iced Brown Sugar Latte',125,'iced')]])],
-             ['لبن مكثّف',null,Q('سادة ولا ببيكان؟',[
-               ['سبانيش',null,D('Iced Spanish Latte',120,'iced')],
-               ['سبانيش بيكان',null,D('Iced Spanish Pecan Latte',150,'iced')]])]])]])],
+               ['كراميل ماكياتو',null,D('Iced Caramel Macchiato',140,'iced')],
+               ['سولتد كراميل',null,D('Iced Salted Caramel Latte',140,'iced')],
+               ['دولسي دي ليتشي',null,D('Iced Dulce De Leche',140,'iced')]])],
+             ['لبن مكثّف',null,D('Iced Spanish Latte',140,'iced')],
+             ['بسكوت ومكسرات',null,Q('كوكي بتر ولا بيكان؟',[
+               ['كوكي بتر',null,D('Iced Cookie Butter',165,'iced')],
+               ['بيكان',null,D('Iced Pecan Latte',170,'iced')]])]])]])],
          ['متخضوضة',null,Q('أنهي طعم؟',[
-           ['وايت موكا',null,D('Iced Shaken White Mocha',140)],
-           ['سولتد كراميل',null,D('Iced Shaken Salted Caramel',140)],
-           ['دولسي دي ليتشي',null,D('Iced Shaken Dulce de Leche',140)]])]])]])],
+           ['وايت موكا',null,D('Iced Shaken White Mocha',170)],
+           ['سولتد كراميل',null,D('Iced Shaken Salted Caramel',170)],
+           ['دولسي دي ليتشي',null,D('Iced Shaken Dulce de Leche',170)],
+           ['بيكان',null,D('Iced Shaken Pecan',170)]])]])]])],
      ['فرابيه',null,Q('كلاسيك ولا بنكهة؟',[
-       ['كلاسيك',null,D('Classic Frappe',130)],
+       ['كلاسيك',null,D('Classic Frappe',140)],
        ['بنكهة',null,Q('أنهي عيلة؟',[
          ['شوكولاتة',null,Q('أنهي فيهم؟',[
-           ['وايت موكا',null,D('White Mocha Frappe',145)],
-           ['شوكولاتة',null,D('Chocolate Frappe',145)],
-           ['براونيز',null,D('Brownies Frappe',145)]])],
+           ['وايت موكا',null,D('White Mocha Frappe',160)],
+           ['شوكولاتة',null,D('Chocolate Frappe',160)],
+           ['براونيز',null,D('Brownies Frappe',160)]])],
          ['كراميل',null,Q('أنهي فيهم؟',[
-           ['سولتد كراميل',null,D('Salted Caramel Frappe',145)],
-           ['دولسي دي ليتشي',null,D('Dulce de Leche Frappe',145)]])],
+           ['سولتد كراميل',null,D('Salted Caramel Frappe',160)],
+           ['دولسي دي ليتشي',null,D('Dulce de Leche Frappe',160)]])],
          ['بسكوت',null,Q('لوتس ولا أوريو؟',[
-           ['لوتس',null,D('Lotus Frappe',145)],
-           ['أوريو',null,D('Oreo Frappe',145)]])],
-         ['حاجة مختلفة',null,Q('قرفة ولا موز؟',[
-           ['قرفة',null,D('Cinnamon Frappe',145)],
-           ['موز',null,D('Banana Frappe',145)]])]])]])]])],
+           ['لوتس',null,D('Lotus Frappe',160)],
+           ['أوريو',null,D('Oreo Frappe',160)]])],
+         ['حاجة مختلفة',null,Q('قرفة ولا بيكان؟',[
+           ['قرفة',null,D('Cinnamon Frappe',160)],
+           ['بيكان',null,D('Pecan Frappe',170)]])]])]])]])],
    ['ماتشا',null,Q('على تلج ولا فرابيه؟',[
-     ['على تلج',null,Q('كلاسيك ولا بنكهة؟',[
+     ['على تلج',null,Q('كلاسيك ولا بنكهة ولا كلاودي؟',[
        ['كلاسيك',null,Q('عادي ولا بلبن مكثّف؟',[
-         ['عادي',null,D('Iced Matcha Latte',125,'matcha')],
-         ['سبانيش',null,D('Iced Spanish Matcha',135,'matcha')]])],
-       ['بنكهة',null,F('Iced Matcha',140,['White Chocolate','Banana Caramel','Salted Caramel','Strawberry','Mango Coconut','Passion Fruit','Lychee','Strawberry Coconut'],'matcha')]])],
-     ['فرابيه',null,F('Matcha Frappe',150,['Mango','Strawberry','Coconut','White Chocolate','Lychee'])]])],
+         ['عادي',null,D('Iced Matcha Latte',140,'matcha')],
+         ['سبانيش',null,D('Iced Spanish Matcha',155,'matcha')]])],
+       ['بنكهة',null,F('Iced Matcha',165,['White Chocolate','Salted Caramel','Strawberry','Mango Coconut','Strawberry Coconut'],'matcha',[['Cookie Butter',null,D('Cookie Butter Matcha',165,'matcha')]])],
+       ['كلاودي',null,D('Cloudy Matcha',155)]])],
+     ['فرابيه',null,F('Matcha Frappe',170,['Mango','Strawberry','Coconut','White Chocolate','Salted Caramel'])]])],
    ['طاقة',null,Q('ريد بول سادة ولا بنكهة؟',[
-     ['سادة',null,D('Red Bull',90)],
-     ['بنكهة',null,D('Flavored Red Bull',135)]])]])],
+     ['سادة',null,D('Red Bull',100)],
+     ['بنكهة',null,D('Flavored Red Bull',145)]])]])],
  ['لأ، من غير كافيين',null,Q('عاوز حاجة تقيلة ولا منعشة؟',[
-   ['تقيلة وكريمي',null,Q('ميلك شيك ولا آيس كريم؟',[
+   ['تقيلة وكريمي',null,Q('ميلك شيك ولا Shake & Ice ولا آيس كريم؟',[
      ['ميلك شيك',null,Q('عاوزه بإيه؟',[
-       ['نكهة واحدة',null,F('Milkshake',130,['Vanilla','Chocolate','Caramel','Salted Caramel','Mango','Strawberry','Mixed Berry','Pineapple','Blueberry','Cola','Peach','Lemon','Passion Fruit','Lychee','Pink Guava','Cotton Candy','Sour Cola'],'boba')],
-       ['فواكه متخلطة',null,F('Milkshake',140,['Mango Passion Fruit','Mango Peach','Strawberry Coconut','Mango Coconut'],'boba')],
+       ['نكهة واحدة',null,Q('فواكه ولا حلو؟',[
+         ['فواكه',null,F('Milkshake',145,['Mango','Dragon Fruit','Strawberry','Mixed Berry','Pineapple','Blueberry','Peach','Lemon','Passion Fruit','Lychee','Pink Guava'],'shake')],
+         ['حلو',null,F('Milkshake',145,['Vanilla','Chocolate','Caramel','Salted Caramel','Bubble Gum','Cotton Candy','Cola','Sour Cola'],'shake')]])],
+       ['فواكه متخلطة',null,F('Milkshake',155,['Mango Passion Fruit','Mango Peach','Strawberry Coconut','Mango Coconut','Lychee Mixed Berry','Pink Guava Passion Fruit'],'shake')],
        ['زبادي وتشيز كيك',null,Q('زبادي ولا تشيز كيك؟',[
          ['زبادي',null,Q('توت ولا مانجا؟',[
-           ['توت',null,D('Berry Yogurt',140,'boba')],
-           ['مانجا',null,D('Mango Yogurt',140,'boba')]])],
+           ['توت',null,D('Berry Yogurt',155,'shake')],
+           ['مانجا',null,D('Mango Yogurt',155,'shake')]])],
          ['تشيز كيك',null,Q('أنهي طعم؟',[
-           ['توت',null,D('Cheesecake Berry',140,'boba')],
-           ['فراولة',null,D('Cheesecake Strawberry',140,'boba')],
-           ['بلوبيري',null,D('Cheesecake Blueberry',140,'boba')],
-           ['زبادي بالتوت',null,D('Berry Yogurt Cheesecake',150,'boba')]])]])],
+           ['توت',null,D('Cheesecake Berry',155,'shake')],
+           ['فراولة',null,D('Cheesecake Strawberry',155,'shake')],
+           ['بلوبيري',null,D('Cheesecake Blueberry',155,'shake')],
+           ['زبادي بالتوت',null,D('Berry Yogurt Cheesecake',165,'shake')]])]])],
        ['حلويات',null,Q('بسكوت ولا شوكولاتة بار ولا مكسرات؟',[
          ['بسكوت وحلويات',null,Q('أنهي فيهم؟',[
-           ['حلوى واحدة',null,F('Milkshake',140,['Brownies','Nutella','Lotus','Oreo','Kinder'],'boba')],
-           ['نوتيلا بالموز',null,D('Milk Nutella Banana',150,'boba')],
-           ['وايت شوكلت بالفراولة',null,D('White Chocolate Strawberry',140,'boba')]])],
-         ['شوكولاتة بار',null,F('Milkshake',150,['Kinder Brownies','Snickers','KitKat','Mars','Bounty'],'boba')],
+           ['حلوى واحدة',null,F('Milkshake',155,['Brownies','Nutella','Lotus','Oreo','Kinder'],'shake')],
+           ['لبن بنوتيلا',null,D('Milk Nutella',165,'shake')],
+           ['وايت شوكلت بالفراولة',null,D('White Chocolate Strawberry',155,'shake')]])],
+         ['شوكولاتة بار',null,F('Milkshake',175,['Snickers','KitKat','Mars','Bounty'],'shake')],
          ['مكسرات',null,Q('أنهي فيهم؟',[
-           ['بيكان سولتد كراميل',null,D('Pecan Salted Caramel',160,'boba')],
-           ['كاجو كراميل',null,D('Cashew Caramel',160,'boba')],
-           ['فستق',null,D('Pistachio',170,'boba')]])],
-         ['حاجة مجنونة',null,Q('أنهي فيهم؟',[
-           ['جيلي كولا',null,D('Jelly Cola Mix',150,'boba')],
-           ['غزل بنات ومارشميلو',null,D('Cotton Candy Marshmallow',150,'boba')]])]])]])],
+           ['بيكان',null,D('Pecan',170,'shake')],
+           ['كاجو كراميل',null,D('Cashew Caramel',190,'shake')],
+           ['فستق',null,D('Pistachio',200,'shake')]])]])]])],
+     ['Shake & Ice','ميكس حلويات بالآيس كريم',Q('أنهي فيهم؟',[
+       ['كيندر براونيز',null,D('Mix Kinder Brownies',170)],
+       ['جيلي كولا',null,D('Mix Jelly Cola',170)],
+       ['غزل بنات ومارشميلو',null,D('Cotton Candy Marshmallow',170)],
+       ['بابل جام ومارشميلو',null,D('Bubble Gum Marshmallow',170)],
+       ['نوتيلا و M&M',null,D('Nutella M&M',170)],
+       ['لوتس آيس كريم',null,D('Mix Lotus Ice Cream',170)]])],
      ['آيس كريم',null,Q('بإيه؟',[
-       ['بنكهة أو بوبا',null,D('Soft Ice Cream (Flavor / Boba)',70)],
-       ['براونيز أو أوريو',null,D('Soft Ice Cream (Brownies / Oreo)',85)]])]])],
+       ['بنكهة أو بوبا',null,D('Soft Ice Cream (Flavor / Boba)',90)],
+       ['براونيز أو أوريو',null,D('Soft Ice Cream (Brownies / Oreo)',100)]])]])],
    ['منعشة',null,Q('طبيعي ولا فوّار؟',[
      ['طبيعي',null,Q('عصير فريش ولا سموزي؟',[
        ['عصير فريش',null,Q('أنهي عصير؟',[
-         ['مانجا',null,D('Mango Juice',85)],
-         ['فراولة',null,D('Strawberry Juice',85)],
-         ['جوافة',null,D('Guava Juice',85)],
-         ['بطيخ',null,D('Watermelon Juice',85)],
-         ['بلح باللبن',null,D('Date with Milk',85)],
-         ['أفوكادو بالعسل',null,D('Avocado with Honey',120)]])],
-       ['سموزي','مضروب بالتلج',F('Smoothie',100,['Watermelon','Mango','Strawberry','Pineapple','Piña Colada','Peach','Pink Guava','Blueberry','Mixed Berry','Passion Fruit','Lychee'],'boba')]])],
+         ['مانجا',null,D('Mango Juice',100)],
+         ['فراولة',null,D('Strawberry Juice',100)]])],
+       ['سموزي','مضروب بالتلج',F('Smoothie',120,['Watermelon','Mango','Strawberry','Pineapple','Piña Colada','Peach','Pink Guava','Blueberry','Mixed Berry','Dragon Fruit','Passion Fruit','Lychee'],'boba')]])],
      ['فوّار ومنعش',null,Q('بأنهي روح؟',[
-       ['نعناع (موهيتو)',null,F('Mojito & Sunshine',100,['Strawberry','Berry','Pineapple','Blueberry','Mixed Berry','Peach','Passion Fruit','Lychee'],'boba')],
+       ['نعناع (موهيتو)',null,F('Mojito & Sunshine',120,['Strawberry','Berry','Pineapple','Blueberry','Mixed Berry','Peach','Passion Fruit','Lychee'],'boba')],
        ['ليمون',null,Q('أنهي ليمونادة؟',[
-         ['ليمون وردي بجوز الهند',null,D('Pink Lemon Coconut',120)],
-         ['مانجا وليمون بجوز الهند',null,D('Mango Lemon Coconut',120)],
-         ['بينا كولادا',null,D('Pina Colada Lemonade',120)]])],
-       ['شاي مثلّج',null,F('Iced Tea',100,['Passion Fruit','Mixed Berries','Strawberry'])],
-       ['Cloudy',null,F('Cloudy',130,['Piña Colada','Lychee','Mixed Berry','Strawberry','Passion Fruit'])],
+         ['ليمون وردي بجوز الهند',null,D('Pink Lemon Coconut',140)],
+         ['مانجا وليمون بجوز الهند',null,D('Mango Lemon Coconut',140)],
+         ['بينا كولادا',null,D('Pina Colada Lemonade',140)],
+         ['جوافة وردي',null,D('Pink Guava Lemonade',140)]])],
+       ['شاي مثلّج',null,F('Iced Tea',110,['Passion Fruit Peach','Mixed Berries','Strawberry Dragon Fruit'])],
+       ['Cloudy',null,F('Cloudy',145,['Piña Colada','Chocolate','Mixed Berry','Strawberry','Passion Fruit'])],
        ['كولا ومية',null,Q('أنهي فيهم؟',[
-         ['ساور كولا',null,D('Sour Cola',110)],
-         ['مية',null,D('Water',12)]])]])]])]])]
+         ['ساور كولا',null,D('Sour Cola',120)],
+         ['مية',null,D('Water',15)]])]])]])]])]
 ]);
 
 const TREE=Q('مزاجك النهارده سخن ولا ساقع؟',[['سخن','حاجة تدفّي',HOT],['ساقع','حاجة تفوّق',COLD]]);
