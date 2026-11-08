@@ -3,7 +3,7 @@
    الصف: [الاسم, السعر, المجموعة, النكهة, {b: البايو, f: الفلاجز, c: اللون, t: تاجز زيادة, u: شكل الكوباية, k: التوبينج}] */
 
 const EXTRAS = {
-  hot:    [["Flavor shot","شوت نكهة",25],["Espresso shot","شوت إسبريسو",35],["Whipping cream","ويبينج كريم",30],["Almond / Coconut milk","لبن لوز / جوز هند",40]],
+  hot:    [["Flavor shot","شوت نكهة",25],["Espresso shot","شوت إسبريسو",35],["Whipping cream","ويبينج كريم",25],["Almond / Coconut milk","لبن لوز / جوز هند",40]],
   iced:   [["Boba","بوبا",25],["Cold foam","كولد فوم",30],["Almond / Coconut milk","لبن لوز / جوز هند",40]],
   matcha: [["Cold foam","كولد فوم",30]],
   boba:   [["Boba","بوبا",25]],
@@ -177,7 +177,7 @@ const MENU = [
   ["Hot Lotus",[140,160],"cream","lot"],
   ["Hot Pistachio",[150,175],"cream","pis"],
   // Sahlab
-  ["Dulce De Leche Sahlab",[130,150],"sahl","dul"],
+  ["Dulce de Leche Sahlab",[130,150],"sahl","dul"],
   ["Pistachio Sahlab",[150,170],"sahl","pis"],
   ["Lotus Sahlab",[150,170],"sahl","lot"],
   ["Nutella Sahlab",[130,150],"sahl","nut"],
@@ -201,7 +201,7 @@ const MENU = [
   ["Iced White Mocha",140,"icof","wc"],
   ["Iced Blended Mocha",140,"icof","choc",{b:["Mocha that got blended and loves it","موكا اتخلطت ومزاجها عالي"],t:"blended"}],
   ["Iced Salted Caramel Latte",140,"icof","sc"],
-  ["Iced Dulce De Leche",140,"icof","dul"],
+  ["Iced Dulce de Leche",140,"icof","dul"],
   ["Iced Cookie Butter",165,"icof","cb"],
   ["Iced Pecan Latte",170,"icof","pec"],
   // Frappes

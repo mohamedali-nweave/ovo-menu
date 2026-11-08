@@ -196,7 +196,7 @@ const Q=(q,o)=>({t:'q',q,o:o.map(([a,h,c])=>({a,h,c}))});
 const F=(base,p,fl,x,more=[])=>Q('Which flavor?',[...fl.map(f=>[f,null,D(base+' · '+f,p,x)]),...more]);
 
 const X={
-  hot:{t:'Add-ons',i:[['Flavor shot: Vanilla · Hazelnut · Caramel · Cinnamon · Salted Caramel · Chocolate',25],['Espresso',35],['Whipping Cream',30],['Almond or Coconut Milk',40]]},
+  hot:{t:'Add-ons',i:[['Flavor shot: Vanilla · Hazelnut · Caramel · Cinnamon · Salted Caramel · Chocolate',25],['Espresso',35],['Whipping Cream',25],['Almond or Coconut Milk',40]]},
   iced:{t:'Add-ons',i:[['Boba',25],['Cold Foam',30],['Almond or Coconut Milk',40]]},
   matcha:{t:'Add-ons',i:[['Cold Foam',30]]},
   boba:{t:'Add-ons',i:[['Boba',25]]},
@@ -270,7 +270,7 @@ const HOT=Q('Need a wake-up?',[
          ['Salted caramel',null,D('Hot Chocolate Salted Caramel',[120,140],'hot')],
          ['Oreo',null,D('Hot Chocolate Oreo',[140,160],'hot')]])]])],
      ['Sahlab',null,Q('What taste?',[
-       ['Dulce de leche',null,D('Dulce De Leche Sahlab',[130,150],'hot')],
+       ['Dulce de leche',null,D('Dulce de Leche Sahlab',[130,150],'hot')],
        ['Pistachio',null,D('Pistachio Sahlab',[150,170],'hot')],
        ['Lotus',null,D('Lotus Sahlab',[150,170],'hot')],
        ['Nutella',null,D('Nutella Sahlab',[130,150],'hot')],
@@ -298,7 +298,7 @@ const COLD=Q('Need a wake-up?',[
              ['Caramel & sugar',null,Q('Which one?',[
                ['Caramel macchiato',null,D('Iced Caramel Macchiato',140,'iced')],
                ['Salted caramel',null,D('Iced Salted Caramel Latte',140,'iced')],
-               ['Dulce de leche',null,D('Iced Dulce De Leche',140,'iced')]])],
+               ['Dulce de leche',null,D('Iced Dulce de Leche',140,'iced')]])],
              ['Condensed milk',null,D('Iced Spanish Latte',140,'iced')],
              ['Cookies & nuts',null,Q('Cookie butter or pecan?',[
                ['Cookie butter',null,D('Iced Cookie Butter',165,'iced')],
