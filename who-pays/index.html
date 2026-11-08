@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Who Pays? · OVO</title>
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@600;700;800&display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+  <header class="bar">
+    <img class="logo" src="../assets/ovo-logo-mark.svg" alt="OVO" width="298" height="116">
+    <button class="lang" id="bLang" type="button"></button>
+  </header>
+
+  <h1 data-t="title"></h1>
+
+  <form id="setup" autocomplete="off" novalidate>
+    <label for="count" data-t="howMany"></label>
+    <input id="count" type="text" inputmode="numeric" maxlength="2" dir="ltr">
+    <p class="range" id="range" data-t="range" hidden></p>
+    <button class="done" id="bDone" type="submit" data-t="done" disabled></button>
+  </form>
+
+  <section id="play" hidden>
+    <p class="msg" id="msg" aria-live="polite"></p>
+    <div class="count off" id="timer" dir="ltr"><span id="timerText"></span></div>
+    <div class="wheel" id="wheel">
+      <svg id="slices" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+      <div class="pointer" id="pointer"><img src="../assets/ovo-pointer.png" alt="" draggable="false"></div>
+    </div>
+    <div class="after off" id="after">
+      <button class="again" id="bAgain" type="button" data-t="again"></button>
+      <button class="change" id="bChange" type="button" data-t="change"></button>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

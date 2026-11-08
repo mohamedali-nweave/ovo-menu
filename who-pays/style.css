@@ -1,0 +1,54 @@
+:root{--blue:#014BAA;--muted:#4078BF;--line:#CCDBEE;--soft:#E6EDF7;--faded:#C0D2EA;--font:"Baloo Bhaijaan 2","Arial Rounded MT Bold",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;--gap:clamp(8px,1.6vmin,18px);color-scheme:only light}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff}
+body{color:var(--blue);font:16px/1.4 var(--font);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+[hidden]{display:none!important}
+
+.wrap{position:relative;width:100%;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;gap:var(--gap);padding:max(10px,env(safe-area-inset-top)) max(8px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+.bar{width:100%;padding:0 6px;display:flex;align-items:center;justify-content:space-between;direction:ltr}
+.logo{display:block;width:auto;height:clamp(38px,6.5vmin,72px)}
+.lang{width:clamp(44px,7vmin,72px);height:clamp(44px,7vmin,72px);padding:0;border-radius:50%;border:2px solid var(--line);background:#fff;font-size:clamp(1rem,2.4vmin,1.6rem);font-weight:800}
+h1{margin:clamp(6px,2vmin,24px) 0 0;font-size:clamp(2.4rem,8vmin,5.5rem);font-weight:800;line-height:1.15;text-align:center}
+
+#setup{width:min(100%,clamp(300px,62vmin,640px));display:flex;flex-direction:column;align-items:center;gap:clamp(14px,2.6vmin,30px);margin:auto 0;padding-bottom:8vh}
+label{font-size:clamp(1.3rem,4vmin,2.8rem);font-weight:700}
+#count{width:clamp(150px,32vmin,320px);height:clamp(92px,20vmin,200px);padding:0;border:2px solid var(--line);border-radius:clamp(24px,4vmin,44px);background:#fff;text-align:center;font-size:clamp(3rem,11vmin,7rem);font-weight:800;line-height:1}
+.range{margin:-4px 0 0;color:var(--muted);font-size:clamp(1rem,2.6vmin,1.8rem);font-weight:600}
+.done{width:100%;border:0;border-radius:999px;padding:clamp(15px,2.6vmin,30px) 20px;background:var(--blue);color:#fff;font-size:clamp(1.3rem,3.8vmin,2.6rem);font-weight:800;transition:background .15s}
+.done:disabled{background:var(--faded);cursor:default}
+
+/* While playing, the page is exactly one screen and app.js sizes the wheel to the space left. */
+body.playing .wrap{height:100vh;height:100svh;min-height:0;overflow:hidden}
+body.playing h1{display:none}
+#play{flex:1;min-height:0;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--gap)}
+.msg{flex:none;margin:0;min-height:clamp(3.2rem,10vmin,7.5rem);display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(1.25rem,4vmin,2.8rem);font-weight:800;line-height:1.2}
+.msg.win{font-size:clamp(1.7rem,5.6vmin,4rem)}
+.wheel{position:relative;flex:none;border-radius:50%;overflow:hidden;direction:ltr;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;animation:open .35s ease-out}
+@keyframes open{from{transform:scale(.6);opacity:0}}
+#slices{display:block;width:100%;height:100%}
+.pointer{position:absolute;inset:0;pointer-events:none;will-change:transform}
+/* The image sits so the point in line with the finger is exactly the wheel centre. */
+.pointer img{position:absolute;left:34.43%;top:23.06%;width:52.12%;height:auto}
+.count{flex:none;min-width:1.9em;padding:.06em .5em;border-radius:999px;background:var(--blue);color:#fff;text-align:center;font-size:clamp(2.2rem,8vmin,5.5rem);font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+.count.off{visibility:hidden}
+.after{flex:none;width:min(100%,clamp(320px,70vmin,720px));display:flex;align-items:center;gap:12px}
+.after.off{visibility:hidden}
+.again{flex:1;border:0;border-radius:999px;padding:clamp(12px,2.2vmin,26px) 16px;background:var(--blue);color:#fff;font-size:clamp(1.1rem,3.2vmin,2.2rem);font-weight:800}
+.change{flex:1;border:2px solid var(--line);border-radius:999px;background:#fff;padding:clamp(10px,2.2vmin,24px) 16px;font-size:clamp(1.1rem,3.2vmin,2.2rem);font-weight:800}
+
+/* Wide screens: the wheel stays centred, with the message on one side and the buttons on the other. */
+@media (orientation:landscape){
+  body.playing .bar{position:absolute;top:max(10px,env(safe-area-inset-top));left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));width:auto;padding:0;z-index:2;pointer-events:none}
+  body.playing .bar>*{pointer-events:auto}
+  #play{direction:ltr;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:auto auto;justify-items:center;align-content:center}
+  [dir=rtl] .msg,[dir=rtl] .after{direction:rtl}
+  .count{grid-column:2;grid-row:1}
+  .wheel{grid-column:2;grid-row:2}
+  .msg{grid-column:1;grid-row:1 / 3;align-self:center;padding:0 10px}
+  .after{grid-column:3;grid-row:1 / 3;align-self:center;width:100%;flex-direction:column;padding:0 10px}
+  .again,.change{flex:none;width:100%}
+}
+@media (prefers-reduced-motion:reduce){.wheel{animation:none}}

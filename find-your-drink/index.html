@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Find Your Drink · OVO</title>
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;600;700;800&display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <section id="landing" hidden>
+    <header class="hero" dir="ltr">
+      <div class="mark"><h1 class="wm"><img src="../assets/ovo-logo-mark.svg" alt="OVO" width="298" height="116"></h1><span class="tag">Specialty Coffee &amp; Milkshakes</span></div>
+      <div class="mascot"><img src="../assets/ovo-icon.svg" alt="" width="443" height="191"></div>
+    </header>
+    <div class="pitch">
+      <h2 dir="ltr">Find Your Drink</h2>
+      <h2 dir="rtl">اختار مشروبك</h2>
+      <small dir="ltr">Swipe through the menu and we'll find the best choice for you</small>
+      <small dir="rtl">اسحب الكروت وهنوصّلك لأنسب اختيار ليك</small>
+    </div>
+    <div class="langs">
+      <button data-lang="en" lang="en">English</button>
+      <button data-lang="ar" lang="ar">عربي</button>
+    </div>
+  </section>
+
+  <section id="game" hidden>
+    <header class="bar">
+      <div class="logo"><img src="../assets/ovo-logo-mark.svg" alt="OVO" width="298" height="116"><span data-t="title"></span></div>
+      <div class="tools">
+        <button class="ibtn" id="bRestart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        <button class="ibtn" id="bLang"></button>
+      </div>
+    </header>
+    <p class="step" id="stepName"></p>
+    <div class="meter"><div class="track"><i id="mFill"></i></div><span id="stepCount" dir="ltr"></span></div>
+    <div class="deck" id="deck"><div class="stack s2"></div><div class="stack s1"></div></div>
+    <div class="controls">
+      <div class="cw"><button class="c nope" id="bNo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><span data-t="no"></span></div>
+      <div class="cw"><button class="c undo" id="bUndo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button></div>
+      <div class="cw"><button class="c like" id="bYes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button><span data-t="yes"></span></div>
+    </div>
+    <p class="hint" data-t="hint"></p>
+  </section>
+
+  <section id="files" hidden>
+    <h2>Photo file names · أسماء ملفات الصور</h2>
+    <p>Put the photos in a folder called <b>images</b> next to index.html, with these exact names (<span id="fCount"></span> drinks).</p>
+    <p dir="rtl">حط الصور في فولدر اسمه <b>images</b> جنب index.html، بنفس الأسماء دي بالظبط.</p>
+    <pre id="fList"></pre>
+  </section>
+
+  <footer class="foot">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.1 4.3 2.6.7-1.5 2.2-2.6 4.3-2.6 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg>
+    <p dir="ltr">11 Hehya Street, Camp Shezar, El-Gaish Road, Alexandria</p>
+    <p><b>Ovo.coffee.eg</b> · <a href="tel:+201127878261" dir="ltr">01127878261</a></p>
+  </footer>
+</div>
+
+<section id="result" class="overlay" hidden>
+  <div class="mwrap">
+    <h2 class="mtitle" data-t="resTitle"></h2>
+    <div class="av dr" id="avDrink"></div>
+    <div class="mcard" id="rCard"></div>
+    <div class="group" id="rAdd"><h3 data-t="addonsQ"></h3><div class="choices" id="addList"></div></div>
+    <div class="group" id="rSize"><h3 data-t="sizeQ"></h3><div class="choices two" id="sizeList"></div></div>
+    <p class="note" data-t="tapNote"></p>
+    <p class="err" id="rErr" data-t="needSize" hidden></p>
+    <div class="mbtns">
+      <button class="btn pri" id="bOrder" data-t="showOrder"></button>
+      <button class="btn ghost" id="bAgainR" data-t="restart"></button>
+    </div>
+  </div>
+</section>
+
+<section id="cashier" class="overlay cashier" hidden>
+  <div class="cwrap">
+    <p class="ck" data-t="order"></p>
+    <div class="obig" id="cBody"></div>
+    <div class="mbtns">
+      <button class="btn dark" id="bBack" data-t="edit"></button>
+      <button class="btn sec" id="bShare" data-t="share"></button>
+      <button class="btn ghost" id="bAgainC" data-t="restart"></button>
+    </div>
+  </div>
+</section>
+
+<section id="none" class="overlay" hidden>
+  <div class="mwrap center">
+    <h2 class="mtitle" id="noneTitle"></h2>
+    <div class="mbtns">
+      <button class="btn pri" id="bNoneAgain" data-t="noneBtn"></button>
+      <button class="btn ghost" id="bNoneStart" data-t="restart"></button>
+    </div>
+  </div>
+</section>
+
+<section id="pick" class="overlay" hidden>
+  <div class="mwrap">
+    <h2 class="mtitle" data-t="pickTitle"></h2>
+    <p class="note" data-t="pickSub"></p>
+    <div class="alist" id="pickList"></div>
+  </div>
+</section>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
