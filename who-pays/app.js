@@ -18,7 +18,8 @@ const store = {
   set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }
 };
 
-let lang = store.get('ovoLang') === 'ar' ? 'ar' : 'en';
+/* Always opens in English; Arabic only via the language button or ?lang=ar. */
+let lang = new URLSearchParams(location.search).get('lang') === 'ar' ? 'ar' : 'en';
 let people = 0, angle = 0, winner = null, spinning = false, tick = 0;
 const t = k => STR[lang][k];
 
