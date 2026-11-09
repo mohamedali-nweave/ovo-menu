@@ -621,8 +621,9 @@ function showFiles() {
 function route() {
   if (location.hash === '#files') return showFiles();
   files.hidden = true;
-  const q = new URLSearchParams(location.search).get('lang'), saved = q || store.get('ovoLang');
-  if (saved === 'ar' || saved === 'en') { setLang(saved, !!q); startGame(); }
+  /* Opens in English by default; a saved choice no longer forces Arabic. ?lang=ar still works. */
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q === 'ar' || q === 'en') { setLang(q, false); startGame(); }
   else { landing.hidden = false; game.hidden = true; }
 }
 
