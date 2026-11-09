@@ -4,15 +4,15 @@
 
 const MIN = 2, MAX = 30, SPIN_MS = 10000, TURNS = 10;
 const STR = {
-  ar: {title: 'مين هيدفع؟', howMany: 'عددكم كام؟', done: 'تم', range: `اكتب رقم من ${MIN} لـ ${MAX}`, finger: 'كل واحد يحط صباعه على رقم', win: 'رقم {n} هو اللي هيدفع', again: 'لفّة تانية', change: 'غيّر العدد', lang: 'EN'},
-  en: {title: 'Who Pays?', howMany: 'How many people?', done: 'Done', range: `Enter a number from ${MIN} to ${MAX}`, finger: 'Everyone put a finger on a number', win: 'Number {n} pays', again: 'Spin again', change: 'Change number', lang: 'ع'}
+  ar: {title: 'مين هيدفع؟', howMany: 'عددكم كام؟', done: 'تم', range: `اكتب رقم من ${MIN} لـ ${MAX}`, finger: 'كل واحد يحط صباعه على رقم، وبعدين دوسوا ابدأ', hold: 'سيبوا صوابعكم مكانها', start: 'ابدأ', win: 'رقم {n} هو اللي هيدفع', again: 'لفّة تانية', change: 'غيّر العدد', lang: 'EN'},
+  en: {title: 'Who Pays?', howMany: 'How many people?', done: 'Done', range: `Enter a number from ${MIN} to ${MAX}`, finger: 'Everyone put a finger on a number, then press Start', hold: 'Keep your fingers in place', start: 'Start', win: 'Number {n} pays', again: 'Spin again', change: 'Change number', lang: 'ع'}
 };
 
 const $ = s => document.querySelector(s);
 const NS = 'http://www.w3.org/2000/svg';
 const setup = $('#setup'), count = $('#count'), range = $('#range'), bDone = $('#bDone');
 const play = $('#play'), msg = $('#msg'), wheel = $('#wheel'), slices = $('#slices'), pointer = $('#pointer'), after = $('#after');
-const timer = $('#timer'), timerText = $('#timerText');
+const timer = $('#timer'), timerText = $('#timerText'), bAction = $('#bAgain');
 const store = {
   get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } },
   set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -20,7 +20,7 @@ const store = {
 
 /* Always opens in English; Arabic only via the language button or ?lang=ar. */
 let lang = new URLSearchParams(location.search).get('lang') === 'ar' ? 'ar' : 'en';
-let people = 0, angle = 0, winner = null, spinning = false, tick = 0;
+let people = 0, angle = 0, winner = null, phase = 'ready', tick = 0, lastTap = 0;
 const t = k => STR[lang][k];
 
 /* Accepts Arabic-keyboard digits too. Returns the number, or null when it is not a whole number. */
@@ -73,10 +73,25 @@ function randomBelow(n) {
 }
 function showMessage() {
   msg.classList.toggle('win', winner != null);
-  msg.textContent = winner != null ? t('win').replace('{n}', winner + 1) : t('finger');
+  msg.textContent = winner != null ? t('win').replace('{n}', winner + 1) : t(phase === 'spin' ? 'hold' : 'finger');
+}
+function setAction(k) {
+  bAction.dataset.t = k;
+  bAction.textContent = t(k);
+}
+/* Shows the wheel and waits, so everyone has time to place a finger before it starts. */
+function ready() {
+  phase = 'ready';
+  winner = null;
+  drawWheel();
+  showMessage();
+  timerText.textContent = SPIN_MS / 1000;
+  timer.classList.remove('off');
+  setAction('start');
+  after.classList.remove('off');
 }
 function spin() {
-  spinning = true;
+  phase = 'spin';
   winner = null;
   after.classList.add('off');
   drawWheel();
@@ -104,9 +119,10 @@ function spin() {
     pointer.style.transform = `rotate(${angle}deg)`;
     anim.cancel();
     winner = pick;
-    spinning = false;
+    phase = 'done';
     drawWheel();
     showMessage();
+    setAction('again');
     after.classList.remove('off');
   };
 }
@@ -130,7 +146,7 @@ function start() {
   fit();
   angle = 0;
   pointer.style.transform = 'rotate(0deg)';
-  spin();
+  ready();
 }
 function reset() {
   document.body.classList.remove('playing');
@@ -153,8 +169,18 @@ function setLang(l) {
 
 count.addEventListener('input', validate);
 setup.addEventListener('submit', e => { e.preventDefault(); if (!bDone.disabled) start(); });
-$('#bAgain').onclick = () => { if (!spinning) spin(); };
-$('#bChange').onclick = () => { if (!spinning) reset(); };
+function act() {
+  if (phase === 'ready') spin();
+  else if (phase === 'done') ready();
+}
+/* Other fingers are resting on the wheel, and a tap made then may not produce a click on phones. */
+bAction.addEventListener('pointerup', e => {
+  if (e.button !== 0 || !bAction.contains(document.elementFromPoint(e.clientX, e.clientY))) return;
+  lastTap = performance.now();
+  act();
+});
+bAction.addEventListener('click', () => { if (performance.now() - lastTap > 600) act(); });
+$('#bChange').onclick = () => { if (phase !== 'spin') reset(); };
 $('#bLang').onclick = () => setLang(lang === 'ar' ? 'en' : 'ar');
 wheel.addEventListener('contextmenu', e => e.preventDefault());
 new ResizeObserver(fit).observe(play);
